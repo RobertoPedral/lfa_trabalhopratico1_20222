@@ -6,6 +6,8 @@ Caso cadastre um não-determinístico, deve-se aplicar a transformação para o 
 
 A leitura do autômato deve ser feita a partir de um arquivo texto contendo as informações. Vamos utilizar o mesmo padrão utilizado no site FSM Simulator. Utilizem o símbolo $ como palavra vazia.
 
+O trabalho será feito na Linguagem Python
+
 # Integrantes do grupo
 
 * Roberto Luiz Pedral -> RobertoPedral
