@@ -5,17 +5,46 @@ def leArquivo(arquiv):
 	automato = []
 	##-----Adiciona cada linha na lista-----
 	for linha in arquivo:
-		automato.append(linha)
+		automato.append(linha.strip("\n").replace(" ", "").split(","))
 	##--------------------------------------
 	arquivo.close()
 	return automato
 
-def leRegrasDeTransicao(automato):
-	regras = []
-	for i in range(1, len(automato)):
-		automato[i] = automato[i].strip("\n").replace(" ", "").split(",")
-		regras.append(automato[i])
-	return regras
+
+
+
+
+def vals(automato):
+	automa = {}
+	chave = ''
+	for li in automato:
+		if (li[0] == '#states'):
+			chave = 'states'
+			continue
+		elif (li[0] == '#initial'):
+			chave = 'initial'
+			continue
+
+		elif (li[0] == '#accepting'):
+			chave = 'accepting'
+			continue
+
+		elif (li[0] == '#alphabet'):
+			chave = 'alphabet'
+			continue
+
+		elif (li[0] == '#transitions'):
+			chave = 'transitions'
+			continue
+		
+		automa[chave] = []
+		automa[chave].append(li[0])
+
+	return automa
+
+
+
+
 
 
 
@@ -27,11 +56,11 @@ def leRegrasDeTransicao(automato):
 
 automato = leArquivo("afd.txt") 
 
-regras = leRegrasDeTransicao(automato)
 
+automato = vals(automato)
 
-for i in len(regras):
-	print(regras[i])
+print(automato)
+
 
 
 palavra = input("Digite uma palavra: ")
