@@ -1,4 +1,4 @@
-import re
+
 
 def leArquivo(arquiv):
 	arquivo = open(arquiv, "r")
@@ -62,7 +62,6 @@ def lerPalavra(automato, palavra):
 		for transit in automato['transitions']:
 						
 			transit = transit.replace('>', ':')
-			transit = transit.replace(',', ':')
 			transit = transit.split(':')
 			transit_estado_entrada, transit_letra, transit_estado_saida = transit
 			if (transit_estado_entrada == estado_atual) and (
@@ -81,6 +80,75 @@ def lerPalavra(automato, palavra):
 		return False
 
 
+def transfAFND(automato):
+
+	afd = {}
+	afd['states'] = []
+	afd['initial'] = automato['initial'][:]
+	afd['accepting'] = []
+	afd['alphabet'] = automato['alphabet'][:]
+	afd['transitions'] = []
+
+	estado_atual = automato['initial'][0]
+
+	afd['states'].append(estado_atual)
+	
+	for estado in afd['states']:
+
+		for letra in afd['alphabet']:
+
+
+			for transit in automato['transitions']:			
+
+
+				transit = transit.replace('>', ':')
+				transit = transit.replace(',', ':')
+				transit = transit.split(':')
+
+				transit_estado_entrada = transit[0]
+				transit_letra = transit[1]
+				transit_estado_saida = transit[2:]
+
+
+
+				if (',' in estado):
+					state = estado.split(',')
+				else:
+					state = [estado]
+
+
+				if (transit_estado_entrada in state):
+
+					for st in state:
+
+						if (len(transit_estado_saida) == 1):
+
+							if (transit_estado_entrada == st) and (
+								transit_letra == letra):
+
+
+								afd['transitions'].append(f'{st}:{letra}>{transit_estado_saida[0]}')
+							
+						elif(len(transit_estado_saida) > 1):
+
+							if (transit_estado_entrada == st) and (
+								transit_letra == letra):
+
+								afd['transitions'].append(f'{st}:{letra}>')
+
+
+							
+
+
+
+					
+				afd['transitions'].append(f'{estado_atual}:{letra}>{transit_estado_saida[0]}')
+
+		
+
+	print(afd['transitions'])
+
+
 
 
 def tipoAut(automato):
@@ -91,7 +159,8 @@ def tipoAut(automato):
     print('Autômatos Finitos Determinístico (AFD) Identificado')
     return True
             
-		
+
+
 				
 
 while True:
@@ -110,6 +179,7 @@ while True:
 			print('Palavra Aceita')
 		else:
 			print('Palavra Recusada')
+
    
 	parada = input("Digite 0 para terminar: ")
  
