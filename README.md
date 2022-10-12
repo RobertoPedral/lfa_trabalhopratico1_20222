@@ -8,6 +8,12 @@ A leitura do autômato deve ser feita a partir de um arquivo texto contendo as i
 
 O trabalho será feito na Linguagem Python
 
+# Como Executar
+
+* Exucute o Arquivo main.py 
+* Escreva o nome do arquivo do automato EX: afd.txt
+* Escreva a palavra que deseja ser lida pelo automato
+
 # Integrantes do grupo
 
 * Roberto Luiz Pedral -> RobertoPedral
